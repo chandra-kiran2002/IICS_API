@@ -1,0 +1,48 @@
+openapi: 3.0.0
+info:
+  title: MockAPI Test API
+  description: API for testing IICS REST v2 connection
+  version: 1.0.0
+servers:
+  - url: https://65a8ca65219bfa37186795e7.mockapi.io
+    description: MockAPI.io server
+paths:
+  /api/test_iics:
+    post:
+      summary: Test IICS Connection
+      description: Endpoint for testing IICS REST v2 connection
+      operationId: testIICS
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  example: "Check out mockapi.io"
+              required:
+                - content
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the created resource
+                  content:
+                    type: string
+                    description: The content that was sent
+                  createdAt:
+                    type: string
+                    format: date-time
+                    description: Creation timestamp
+        '400':
+          description: Bad request
+        '500':
+          description: Server error
